@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Subject Notes</title>
+
+<style>
+body{
+margin:0;
+font-family:"Segoe UI";
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+}
+
+/* 🌌 background */
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:radial-gradient(circle,#ffffff15 1px,transparent 1px);
+background-size:35px 35px;
+animation:move 80s linear infinite;
+z-index:-1;
+}
+@keyframes move{
+from{transform:translateY(0);}
+to{transform:translateY(-500px);}
+}
+
+/* back */
+.back{
+position:fixed;
+top:20px;
+left:20px;
+padding:8px 14px;
+border:none;
+border-radius:10px;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+color:white;
+cursor:pointer;
+}
+
+/* layout */
+.container{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:25px;
+padding:30px;
+max-width:1200px;
+margin:auto;
+}
+
+/* glass card */
+.card{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(18px);
+border-radius:16px;
+padding:18px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+.card:hover{
+transform:translateY(-5px);
+}
+
+.details{
+max-height:0;
+overflow:hidden;
+transition:0.5s;
+}
+.card.active .details{
+max-height:6000px;
+}
+
+/* chapter */
+.chapter{
+display:flex;
+justify-content:space-between;
+background:rgba(255,255,255,0.08);
+padding:8px;
+margin:5px 0;
+border-radius:8px;
+}
+
+button{
+background:linear-gradient(45deg,#00c6ff,#0072ff);
+border:none;
+padding:4px 10px;
+border-radius:6px;
+color:white;
+cursor:pointer;
+}
+h2{text-align:center;padding:20px;}
+</style>
+
+</head>
+<body>
+
+<button class="back" onclick="goBack()">⬅ Back</button>
+
+<h2>📚 Master Notes</h2>
+
+<div class="container">
+
+<!-- SEM 1 -->
+<div class="card" onclick="toggle(this)">
+<h3>🧪 Engineering Physics</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Wave Optics 
+  <a href="phy1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Lasers and Fiber Optics
+  <a href="phy2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: Quantum Mechanics
+  <a href="phy3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Semiconductors
+  <a href="phy4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Magnetism and Electromagnetic Induction
+  <a href="phy5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>📐 Engineering Mathematics-I</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Linear Algebra
+  <a href="m1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Linear Algebra 2
+  <a href="m2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: Calculus for Single Variable
+  <a href="m3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Multivariable Calculus
+  <a href="m4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: multivariable calculus Integration
+  <a href="m5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>💻 Programming for Problem Solving</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Introduction to Programming
+  <a href="c1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Operators, Conditions Branches and Loops
+  <a href="c2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: User Defined Functions
+  <a href="c3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Arrays
+  <a href="c4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Basic Algorithms
+  <a href="c5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 6: Function and Recursion
+  <a href="c6.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 7: Structure, Function and Pointers
+  <a href="c7.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>🔌 Basic Electronics Engineering</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Semiconductor Devices and Applications
+  <a href="e1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Bipolar Junction Transistor (BJT)
+  <a href="e2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: Field Effect Transistor (FET)
+  <a href="e3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Operational Amplifiers (Op-Amps)
+  <a href="e4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Fundamentals of Digital Electronics
+  <a href="e5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+  
+<div class="card" onclick="toggle(this)">
+<h3>🖥️ IT Workshop</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Computer Hardware and Peripherals
+  <a href="it1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Internet and Web Technologies
+  <a href="it2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: Microsoft Word
+  <a href="it3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Latex
+  <a href="it4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Microsoft Excel
+  <a href="it5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Microsoft Powerpoint
+  <a href="it5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>🚮 Swachh Bharat Mission</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: History and Objectives
+  <a href="sb1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Waste Management
+  <a href="sb2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: Sanitation and Hygiene
+  <a href="sb3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Community Participation
+  <a href="sb4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Rural and Urban Models
+  <a href="sb5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+
+<!-- SEM 2 -->
+<div class="card" onclick="toggle(this)">
+<h3>⚗️ Engineering Chemistry</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Atomic and Molecular Structure
+  <a href="ch1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Spectroscopy
+  <a href="ch2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: Electrochemistry and Fuel Cells
+  <a href="ch3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Chemical Equilibrium
+  <a href="ch4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Water Chemistry
+  <a href="ch5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 6: Polymer and Plastics
+  <a href="ch6.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 7: Organic Reactions and Synthesis A Drug Molecule
+  <a href="ch7.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>📊 Engineering Mathematics-II</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Complex Analysis 1(Integration)
+  <a href="ma1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Complex Analysis 2
+  <a href="ma2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: Ordinary Differential Equations
+  <a href="ma3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Laplace Transform
+  <a href="ma4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Fourier Series (Integration)
+  <a href="ma5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>🗣️ Communicative English</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Vocabulary Building
+  <a href="en1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Basic Writing Skills
+  <a href="en2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: Common Errors in English
+  <a href="en3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Principles of Appropriate Writing
+  <a href="en4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Comprehension Of Written English
+  <a href="en5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>🐍 Python Programming</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Input and Output
+  <a href="py1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Control Flow statements, Functions and Loops
+  <a href="py2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: Strings
+  <a href="py3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Lists
+  <a href="py4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Dictionaries,Tuples and Sets
+  <a href="py5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>🌐 Web Design</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Fundamentals of Web Design
+  <a href="wd1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: HTML5
+  <a href="wd2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: CSS
+  <a href="wd3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: JavaScript
+  <a href="wd4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 5: Advance JavaScript
+  <a href="wd5.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+
+<div class="card" onclick="toggle(this)">
+<h3>🏃 Sports/Yoga/NCC/NSS</h3>
+<div class="details">
+<div class="chapter">
+  Unit 1: Physical Fitness
+  <a href="sp1.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 2: Rules / Yoga
+  <a href="sp2.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 3: Social Service
+  <a href="sp3.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+<div class="chapter">
+  Unit 4: Personality Development
+  <a href="sp4.pdf" download>
+    <button>Download</button>
+  </a>
+</div>
+</div>
+</div>
+
+
+<script>
+function toggle(c){
+c.classList.toggle("active");
+}
+
+function d(f){
+event.stopPropagation();
+window.location.href="notes/"+f+".pdf";
+}
+function goBack(){
+  window.location.href = "index.html";
+}
+
+</script>
+
+</body>
+</html>
