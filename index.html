@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+
+<body>
+
+  
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>📊 Home</h2>
+
+  <ul>
+    
+    <li onclick="window.location.href='tasks.html'" style="cursor:pointer;">
+  <i class="fas fa-note-sticky"></i> Tasks
+</li>
+    <li onclick="window.location.href='notes.html'" style="cursor:pointer;">
+  <i class="fas fa-note-sticky"></i> Daily Learning Log
+</li>
+<li onclick="window.location.href='share.html'" style="cursor:pointer;">
+  <i class="fas fa-share"></i> SemMaster Notes 
+</li>
+    
+  </ul>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+
+    <h2 id="welcomeUser"></h2>
+
+    <div class="top-actions">
+      <input type="text" placeholder="Search...">
+
+      <div class="profile" onclick="toggleMenu()">
+        <img id="profilePic" src="https://i.pravatar.cc/100">
+      </div>
+
+      <input type="file" id="fileInput" hidden>
+      <button onclick="fileInput.click()" class="upload-btn">Upload</button>
+
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+  </div>
+
+  <!-- PROFILE MENU -->
+  <div id="menu" class="hidden" style="position:absolute; right:20px; top:70px; background:#fff; padding:10px; border-radius:10px;">
+    <input id="nameInput" placeholder="Enter name"><br><br>
+    <button onclick="updateName()">Save Name</button><br><br>
+    <button onclick="toggleDark()">🌙 Dark Mode</button>
+  </div>
+
+  <h1>Hey 👋</h1>
+
+  <div class="cards">
+
+<!-- 🔥 NOTE SHARE CARD -->
+<div class="card">
+
+  <h3>📸 Share Handwritten Note</h3>
+
+  <!-- 🔍 SEARCH USER -->
+  <input type="text" id="searchUser" placeholder="🔍 Search username..." style="
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    margin-bottom:10px;
+  ">
+
+  <!-- REQUEST BUTTON -->
+  <button onclick="searchAndRequest()" style="
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background:#6366f1;
+    color:white;
+    margin-bottom:10px;
+    cursor:pointer;
+  ">
+    Request Note
+  </button>
+
+  <!-- LINE -->
+  <div style="height:1px; background:#444; margin:10px 0;"></div>
+
+  <!-- MULTIPLE FILE -->
+   <!-- FOLDER SELECT -->
+   
+<select id="folderSelect">
+  <option value="">Select Folder</option>
+</select>
+
+  <input type="file" id="noteImage" multiple style="margin:10px 0;"><br>
+
+  <!-- UPLOAD -->
+  <button onclick="uploadNote()" style="
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#22c55e;
+    color:white;
+    cursor:pointer;
+  ">
+    Upload & Share
+  </button>
+
+  <!-- LINKS -->
+  <div id="noteLink" style="margin-top:10px;"></div>
+
+</div>
+    <!-- बाकी cards -->
+    <div class="card">
+      <h3>Weather</h3>
+      <p id="weather">Loading...</p>
+    </div>
+
+  <a href="holiday.pdf" target="_blank" class="card" style="display:block; text-decoration:none;">
+  📁 Holiday
+</a>
+
+    <a href="https://www.akubihar.com/#list" target="_blank" class="card">
+  ✅  PYQ
+</a>
+   
+    <a href="schedule.pdf" target="_blank" class="card" style="display:block; text-decoration:none;">
+  📩 Class Schedule
+</a>
+
+    <a href="events.pdf" target="_blank" class="card" style="display:block; text-decoration:none;">
+  📊 Upcoming Events
+</a>
+
+    <div class="card">
+      🔥 Streak  10 <br><br>
+      <div class="bar"><div class="fill"></div></div>
+    </div>
+<a href="faculty.pdf" target="_blank" class="card" style="display:block; text-decoration:none;">
+  📘 GEC Branch (Faculty)
+</a>
+    <div class="card" onclick="window.location.href='notes.html'">
+  Today Goal
+</div>
+    <div class="card">Attendance<br>78%</div>
+
+  
+      <!-- 📊 ATTENDANCE CHART -->
+<div class="card chart">
+  <h3>📊 Attendance Chart</h3>
+  <canvas id="myChart"></canvas>
+</div>
+
+<!-- 📅 CALENDAR -->
+<div class="card calendar">
+  <h3>📅 Calendar</h3>
+  <iframe
+    src="https://calendar.google.com/calendar/embed?src=en.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKolkata"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+  </div>
+
+  <!-- 🔻 PREMIUM FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- LEFT -->
+    <div class="footer-left">
+      <h3>📚 StudySync</h3>
+      <p>Smart study platform 🚀</p>
+    </div>
+
+    <!-- LINKS -->
+    <div class="footer-links">
+      <a href="#">Home</a>
+      <a href="#">Notes</a>
+      <a href="#">Events</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="footer-social">
+      <a href="https://github.com/tejass9631/" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.instagram.com/tejas_s9631?igsh=cXhvYnJzZHFqZGxk/" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/tejaswai-swarnam-845803222?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </div>
+
+  </div>
+
+  <p class="footer-copy">© 2026 StudySync | Made by Tejas 💪</p>
+</footer>
+
+
+</div>
+
+
+
+
+<script type="module">
+
+// ================= FIREBASE =================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  setDoc,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC3YacrMCmkhIjFLiAbMqFk75Of9DJBmyE",
+  authDomain: "studysync-1a21e.firebaseapp.com",
+  projectId: "studysync-1a21e",
+  storageBucket: "studysync-1a21e.firebasestorage.app",
+  messagingSenderId: "162935727458",
+  appId: "1:162935727458:web:439eb442f317742899783b"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ================= USER =================
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    welcomeUser.innerText = "Welcome, " + (user.displayName || user.email);
+
+    const snap = await getDoc(doc(db, "users", user.uid));
+    if (snap.exists()) {
+      nameInput.value = snap.data().name || "";
+    }
+  } else {
+    window.location.href = "login.html";
+  }
+});
+
+// ================= LOGOUT =================
+window.logout = function(){
+  signOut(auth).then(() => {
+    window.location.href = "login.html";
+  });
+};
+
+// ================= WEATHER =================
+async function loadWeather() {
+  let res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=25.6&longitude=85.1&current_weather=true");
+  let data = await res.json();
+  document.getElementById("weather").innerText =
+    "🌡 " + data.current_weather.temperature + "°C";
+}
+loadWeather();
+
+// ================= CHART =================
+const ctx = document.getElementById('myChart');
+if (ctx) {
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Math','Chemistry','English','WD', 'Python'],
+      datasets: [{
+        data: [90,40,50,60,90],
+        backgroundColor: ['#6366F1','#22C55E','#F59E0B','#EF4444','#8B5CF6']
+      }]
+    }
+  });
+}
+
+// ================= PROFILE MENU =================
+window.toggleMenu = function(){
+  document.getElementById("menu").classList.toggle("hidden");
+};
+
+// ================= UPDATE NAME =================
+window.updateName = async function () {
+  const user = auth.currentUser;
+  const name = nameInput.value;
+
+  await updateProfile(user, { displayName: name });
+
+  await setDoc(doc(db, "users", user.uid), {
+    name: name,
+    email: user.email
+  });
+
+  welcomeUser.innerText = "Welcome, " + name + " 👋";
+  alert("Saved ✅");
+};
+
+// ================= DARK MODE =================
+window.toggleDark = function () {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("dark", document.body.classList.contains("dark"));
+};
+
+if (localStorage.getItem("dark") === "true") {
+  document.body.classList.add("dark");
+}
+
+// ================= PROFILE PIC =================
+const fileInput = document.getElementById("fileInput");
+const profilePic = document.getElementById("profilePic");
+
+fileInput.addEventListener("change", async function () {
+  const file = this.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "mypreset123");
+
+  const res = await fetch("https://api.cloudinary.com/v1_1/dv5ph6z0w/image/upload", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+
+  if (data.secure_url) {
+    profilePic.src = data.secure_url;
+    localStorage.setItem("dp", data.secure_url);
+  }
+});
+
+// ================= 🔥 NOTE SHARE =================
+window.uploadNote = async function () {
+
+  const file = document.getElementById("noteImage").files[0];
+  const noteLink = document.getElementById("noteLink");
+
+  if (!file) {
+    alert("पहले image select कर ❌");
+    return;
+  }
+
+  noteLink.innerText = "Uploading... ⏳";
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "mypreset123");
+
+  const res = await fetch("https://api.cloudinary.com/v1_1/dv5ph6z0w/image/upload", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+
+  if (data.secure_url) {
+    noteLink.innerText = data.secure_url;
+    navigator.clipboard.writeText(data.secure_url);
+    alert("Link copied 🔗");
+  } else {
+    noteLink.innerText = "Upload failed ❌";
+  }
+};
+
+</script>
+
+</body>
+</html>   
