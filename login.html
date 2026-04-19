@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pro Login</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+
+      background: linear-gradient(270deg, #c7d2fe, #fbcfe8, #a5b4fc);
+      background-size: 600% 600%;
+      animation: bgMove 10s ease infinite;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      width: 350px;
+      padding: 25px;
+
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    .tabs div {
+      cursor: pointer;
+      padding: 10px;
+      font-weight: bold;
+    }
+
+    .active {
+      border-bottom: 2px solid #6366f1;
+      color: #6366f1;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+
+      border-radius: 10px;
+      border: none;
+      outline: none;
+
+      background: rgba(255,255,255,0.6);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+
+      border: none;
+      border-radius: 12px;
+
+      background: #6366f1;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+    }
+
+    .profile {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .profile img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    #msg {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- PROFILE -->
+  <div class="profile">
+    <img id="avatar" src="https://i.pravatar.cc/100">
+    <h3 id="username">Guest</h3>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div id="loginTab" class="active" onclick="showLogin()">Login</div>
+    <div id="signupTab" onclick="showSignup()">Signup</div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginBox">
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <button onclick="forgot()">Forgot Password</button>
+  </div>
+
+  <!-- SIGNUP -->
+  <div id="signupBox" class="hidden">
+    <input id="sEmail" placeholder="Email">
+    <input id="sPassword" type="password" placeholder="Password">
+    <button onclick="signup()">Create Account</button>
+  </div>
+
+  <p id="msg"></p>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC3YacrMCmkhIjFLiAbMqFk75Of9DJBmyE",
+  authDomain: "studysync-1a21e.firebaseapp.com",
+  projectId: "studysync-1a21e",
+  storageBucket: "studysync-1a21e.firebasestorage.app",
+  messagingSenderId: "162935727458",
+  appId: "1:162935727458:web:439eb442f317742899783b"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const msg = document.getElementById("msg");
+
+// TAB SWITCH
+window.showSignup = function(){
+  loginBox.classList.add("hidden");
+  signupBox.classList.remove("hidden");
+  signupTab.classList.add("active");
+  loginTab.classList.remove("active");
+}
+
+window.showLogin = function(){
+  signupBox.classList.add("hidden");
+  loginBox.classList.remove("hidden");
+  loginTab.classList.add("active");
+  signupTab.classList.remove("active");
+}
+
+// SIGNUP
+window.signup = function(){
+  let email = sEmail.value;
+  let pass = sPassword.value;
+
+  createUserWithEmailAndPassword(auth, email, pass)
+    .then(() => msg.innerText = "✅ Account Created")
+    .catch(err => msg.innerText = err.message);
+}
+
+// LOGIN
+window.login = function(){
+  let emailVal = document.getElementById("email").value;
+  let passVal = document.getElementById("password").value;
+
+  signInWithEmailAndPassword(auth, emailVal, passVal)
+    .then((userCredential) => {
+      // 🔥 IMPORTANT
+      window.location.href = "index.html";
+    })
+    .catch(err => {
+      msg.innerText = err.message;
+    });
+}
+
+// FORGOT
+window.forgot = function(){
+  let emailVal = email.value;
+
+  sendPasswordResetEmail(auth, emailVal)
+    .then(() => msg.innerText = "📧 Reset email sent")
+    .catch(err => msg.innerText = err.message);
+}
+
+</script>
+
+</body>
+</html>
