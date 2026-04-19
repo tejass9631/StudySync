@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notes</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1a1a2e, #0a0a0a);
+      color: white;
+    }
+
+    /* 🌠 stars */
+    body::before {
+      content: "";
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      background: url("https://www.transparenttextures.com/patterns/stardust.png");
+      animation: move 120s linear infinite;
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    @keyframes move {
+      from { transform: translateY(0); }
+      to { transform: translateY(-1000px); }
+    }
+
+    /* 🔙 BACK BUTTON */
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: none;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      z-index: 10;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      padding: 25px;
+      font-size: 24px;
+    }
+
+    /* 🔥 LAYOUT */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* 💎 CARD */
+    .card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 18px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+      min-height: 140px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 140px;
+      border-radius: 10px;
+      padding: 10px;
+      border: none;
+      outline: none;
+      resize: none;
+      background: rgba(255,255,255,0.9);
+      color: black;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: linear-gradient(45deg, #6c63ff, #8f94fb);
+      color: white;
+    }
+
+    .note-list div {
+      padding: 8px;
+      margin-bottom: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+    }
+
+    /* 📊 progress */
+    .progress {
+      height: 12px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 60%;
+      background: linear-gradient(90deg, #00ffcc, #00c6ff);
+    }
+
+    /* 🕒 CLOCK */
+    .clock-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .clock-left h2 {
+      font-size: 26px;
+    }
+
+    .analog-clock {
+      width: 100px;
+      height: 100px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .hand {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform-origin: bottom;
+      transform: translateX(-50%);
+    }
+
+    .hour { height: 25px; width: 3px; background: white; }
+    .minute { height: 35px; width: 2px; background: white; }
+    .second { height: 40px; width: 1px; background: red; }
+
+    .center-dot {
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+  </style>
+</head>
+
+<body>
+
+<button class="back-btn" onclick="goBack()">⬅ Back</button>
+
+<h1>📝 Daily Learning Log </h1>
+
+<div class="container">
+
+  <div class="card">
+    <h3>Write Notes</h3>
+    <textarea id="noteInput" placeholder="Write something..."></textarea>
+    <button onclick="saveNote()">Save</button>
+  </div>
+
+  <div class="card">
+    <h3>Saved Notes</h3>
+    <div class="note-list" id="notesList"></div>
+  </div>
+
+  <div class="card">
+    <h3>Today's Progress</h3>
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
+    <p style="margin-top:8px;">60% completed</p>
+  </div>
+
+  <div class="card clock-card">
+    <div class="clock-left">
+      <h2 id="digitalTime"></h2>
+      <p>India</p>
+    </div>
+
+    <div class="analog-clock">
+      <div class="hand hour"></div>
+      <div class="hand minute"></div>
+      <div class="hand second"></div>
+      <div class="center-dot"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Today's Goal</h3>
+    <p>Finish Math + Python</p>
+  </div>
+
+  <div class="card">
+    <h3>Motivation</h3>
+    <p>"Consistency beats motivation."</p>
+  </div>
+
+</div>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+
+  function saveNote() {
+    let input = document.getElementById("noteInput").value;
+    if (!input) return;
+
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+    notes.push(input);
+    localStorage.setItem("notes", JSON.stringify(notes));
+
+    document.getElementById("noteInput").value = "";
+    loadNotes();
+  }
+
+  function loadNotes() {
+    let notes = JSON.parse(localStorage.getItem("notes")) || [
+      "Revise Laplace Transform",
+      "Practice Python loops",
+      "Complete Chemistry numericals"
+    ];
+
+    let list = document.getElementById("notesList");
+    list.innerHTML = "";
+
+    notes.forEach(n => {
+      let div = document.createElement("div");
+      div.textContent = "• " + n;
+      list.appendChild(div);
+    });
+  }
+
+  function updateClock() {
+    const now = new Date();
+
+    document.getElementById("digitalTime").innerText =
+      now.toLocaleTimeString();
+
+    const sec = now.getSeconds();
+    const min = now.getMinutes();
+    const hr = now.getHours();
+
+    document.querySelector(".second").style.transform =
+      `translateX(-50%) rotate(${sec * 6}deg)`;
+
+    document.querySelector(".minute").style.transform =
+      `translateX(-50%) rotate(${min * 6}deg)`;
+
+    document.querySelector(".hour").style.transform =
+      `translateX(-50%) rotate(${hr * 30 + min * 0.5}deg)`;
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
+  loadNotes();
+</script>
+
+</body>
+</html>
